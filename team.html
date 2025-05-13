@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Киберполигон - Участники</title>
+    <style>
+        :root {
+            --dark-bg: #0a192f;
+            --accent: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --card-bg: #112240;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: #020c1b;
+            padding: 1.2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(2,12,27,0.7);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .member-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #233554;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .member-info {
+            flex-grow: 1;
+        }
+
+        .member-name {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .member-group {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .filter-btn {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Киберполигон</a>
+            <ul class="nav-links">
+                <li><a href="about.html">О проекте</a></li>
+                <li><a href="team.html" class="active">Участники</a></li>
+                <li><a href="journal.html">Журнал и Ресурсы</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterMembers('all')">Все</button>
+            <button class="filter-btn" onclick="filterMembers('lead')">Руководство</button>
+            <button class="filter-btn" onclick="filterMembers('senior')">Старшекурсники</button>
+            <button class="filter-btn" onclick="filterMembers('freshman')">Первокурсники</button>
+        </div>
+
+        <div id="team-grid" class="team-grid"></div>
+    </div>
+
+    <script>
+        // Полный список участников
+        const members = [
+            // Руководство
+            {
+                name: "Гневшев Александр Юрьевич",
+                group: "Руководитель проекта",
+                role: "lead"
+            },
+
+            // Старшекурсники
+            { name: "Аверин Илья Олегович", group: "221-331", role: "senior" },
+            { name: "Арутюнян Феликс Рудикович", group: "231-329", role: "senior" },
+            { name: "Ахмедяров Андрей Вячеславович", group: "231-329", role: "senior" },
+            { name: "Белоногов Артем Игоревич", group: "231-323", role: "senior" },
+            { name: "Вареха Анна Вячеславовна", group: "231-351", role: "senior" },
+            { name: "Вертков Кирилл Андреевич", group: "231-352", role: "senior" },
+            { name: "Давыдов Денис Михайлович", group: "231-351", role: "senior" },
+            { name: "Денисов Валерий Александрович", group: "221-331", role: "senior" },
+            { name: "Жакарис Маргарита Александровна", group: "221-331", role: "senior" },
+            { name: "Закураева Амина Анзоровна", group: "231-352", role: "senior" },
+            { name: "Кирияк Юрий Анатольевич", group: "221-331", role: "senior" },
+            { name: "Кожемякин Даниил Сергеевич", group: "231-3213", role: "senior" },
+            { name: "Комендант Максим Игоревич", group: "221-361", role: "senior" },
+            { name: "Майер Артур Анатольевич", group: "221-331", role: "senior" },
+            { name: "Найдёнова Юлия Дмитриевна", group: "231-351", role: "senior" },
+            { name: "Покрышкин Алексей Сергеевич", group: "231-352", role: "senior" },
+            { name: "Попов Андрей Юрьевич", group: "231-351", role: "senior" },
+            { name: "Разумов Илья Михайлович", group: "231-352", role: "senior" },
+            { name: "Стульников Сергей Андреевич", group: "221-331", role: "senior" },
+            { name: "Ткач Владимир Витальевич", group: "231-329", role: "senior" },
+            { name: "Федюнин Иван Максимович", group: "231-361", role: "senior" },
+            { name: "Шнайдер Никита Олегович", group: "221-331", role: "senior" },
+
+            // Первокурсники
+            { name: "Агаев Арслан", group: "241-353", role: "freshman" },
+            { name: "Альварадо Эрнандес Иманол", group: "241-325", role: "freshman" },
+            { name: "Анашин Александр", group: "241-352", role: "freshman" },
+            { name: "Анненкова Дарья Дмитриевна", group: "241-371", role: "freshman" },
+            { name: "Баранова Мария Григорьевна", group: "241-371", role: "freshman" },
+            { name: "Грищенко Матвей Романович", group: "241-325", role: "freshman" },
+            { name: "Данихно Велес Иванович", group: "241-324", role: "freshman" },
+            { name: "Дерягин Дмитрий Алексеевич", group: "241-372", role: "freshman" },
+            { name: "Друдэ Ирина Викторовна", group: "241-353", role: "freshman" },
+            { name: "Дубина Анастасия Александровна", group: "241-327", role: "freshman" },
+            { name: "Жаворонкова Дарья Дмитриевна", group: "241-325", role: "freshman" },
+            { name: "Желобаев Кирилл Олегович", group: "241-324", role: "freshman" },
+            { name: "Жердин Иван Сергеевич", group: "241-325", role: "freshman" },
+            { name: "Зверев Захар Дмитриевич", group: "241-351", role: "freshman" },
+            { name: "Звягинцев Артемий Максимович", group: "241-353", role: "freshman" },
+            { name: "Зелёнкин Дмитрий Владимирович", group: "241-325", role: "freshman" },
+            { name: "Иванов Кирилл Анатольевич", group: "241-325", role: "freshman" },
+            { name: "Истомина Елизавета Алексеевна", group: "241-371", role: "freshman" },
+            { name: "Казарян Мария Арсеновна", group: "241-372", role: "freshman" },
+            { name: "Кодзаев Николай Петрович", group: "241-372", role: "freshman" },
+            { name: "Коконина Екатерина Олеговна", group: "241-371", role: "freshman" },
+            { name: "Колесникова Ирина Владимировна", group: "241-372", role: "freshman" },
+            { name: "Колмогоров Алексей Владимирович", group: "241-321", role: "freshman" },
+            { name: "Конишевский Даниил Кириллович", group: "241-372", role: "freshman" },
+            { name: "Крипак Ксения Романовна", group: "241-326", role: "freshman" },
+            { name: "Куприянова Юлия Андреевна", group: "241-353", role: "freshman" },
+            { name: "Макарычева Софья Альбертовна", group: "241-371", role: "freshman" },
+            { name: "Мухаметов Степан Владимирович", group: "241-325", role: "freshman" },
+            { name: "Невретдинов Илья Рушанович", group: "241-327", role: "freshman" },
+            { name: "Некрасов Алексей Олегович", group: "241-3210", role: "freshman" },
+            { name: "Новиков Артём Дмитриевич", group: "241-372", role: "freshman" },
+            { name: "Отхонова Амуланга Александровна", group: "241-371", role: "freshman" },
+            { name: "Павлов Евгений Алексеевич", group: "241-325", role: "freshman" },
+            { name: "Пак Алексей Витальевич", group: "241-352", role: "freshman" },
+            { name: "Палехова Мария Алексеевна", group: "241-372", role: "freshman" },
+            { name: "Парамонычева Анастасия Васильевна", group: "241-372", role: "freshman" },
+            { name: "Пашковский Марк Анатольевич", group: "241-329", role: "freshman" },
+            { name: "Петров Кирилл Андреевич", group: "241-321", role: "freshman" },
+            { name: "Петрова Ксения Андреевна", group: "241-325", role: "freshman" },
+            { name: "Попиков Иван Алексеевич", group: "241-372", role: "freshman" },
+            { name: "Рогинская Александра Евгеньевна", group: "241-353", role: "freshman" },
+            { name: "Румянцев Станислав Вячеславович", group: "241-372", role: "freshman" },
+            { name: "Сазонова Елизавета Юрьевна", group: "241-324", role: "freshman" },
+            { name: "Саканян Артак Севакович", group: "241-325", role: "freshman" },
+            { name: "Сальников Лев Владимирович", group: "241-324", role: "freshman" },
+            { name: "Сергеев Александр Максимович", group: "241-325", role: "freshman" },
+            { name: "Скрынникова Полина Андреевна", group: "241-371", role: "freshman" },
+            { name: "Стальмахов Иван Сергеевич", group: "241-3211", role: "freshman" },
+            { name: "Сулейманов Раул Анарович", group: "241-352", role: "freshman" },
+            { name: "Тимошкин Роман Витальевич", group: "241-352", role: "freshman" },
+            { name: "Товстоган Максим Алексеевич", group: "241-325", role: "freshman" },
+            { name: "Феклин Роман Евгеньевич", group: "241-325", role: "freshman" },
+            { name: "Чарыев Аллагулы", group: "241-353", role: "freshman" },
+            { name: "Чернов Владимир Алексеевич", group: "241-326", role: "freshman" },
+            { name: "Чернышев Георгий Леонидович", group: "241-372", role: "freshman" },
+            { name: "Чурбанова София Ивановна", group: "241-325", role: "freshman" },
+            { name: "Щербина Артем Витальевич", group: "241-372", role: "freshman" },
+            { name: "Ямгурсина Диана Денисовна", group: "241-371", role: "freshman" }
+        ];
+
+        // Функция генерации карточек
+        function generateMemberCards(filter = 'all') {
+            const container = document.getElementById('team-grid');
+            container.innerHTML = '';
+
+            members.forEach(member => {
+                if(filter === 'all' || member.role === filter) {
+                    const card = document.createElement('div');
+                    card.className = 'member-card';
+                    card.innerHTML = `
+                        <div class="member-header">
+                            <div class="member-info">
+                                <h3 class="member-name">${member.name}</h3>
+                                <p class="member-group">${member.group}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        // Функция фильтрации
+        function filterMembers(role) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            generateMemberCards(role === 'all' ? 'all' : role);
+        }
+
+        // Инициализация
+        generateMemberCards('all');
+    </script>
+</body>
+</html>
