@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Киберполигон - Главная</title>
+    <title>Киберполигон - Учебная платформа кибербезопасности</title>
     <style>
         :root {
             --dark-bg: #0a192f;
@@ -26,7 +26,6 @@
             line-height: 1.6;
         }
 
-        /* Навигация */
         nav {
             background: #020c1b;
             padding: 1.2rem;
@@ -69,69 +68,63 @@
             color: var(--accent);
         }
 
-        /* Герой секция */
         .hero {
             padding: 120px 2rem 4rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(10,25,47,0.9), rgba(10,25,47,0.9)),
-                        url('pattern.png');
-            background-size: cover;
         }
 
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--text-primary);
             margin-bottom: 2rem;
         }
 
-        .hero p {
+        .project-annotation {
             font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
         }
 
-        /* Ключевые показатели */
-        .stats-grid {
+        .highlights-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .highlight-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 3rem;
             margin: 4rem 0;
         }
 
         .stat-item {
             text-align: center;
-            padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 8px;
         }
 
-        .stat-item h3 {
-            color: var(--accent);
+        .stat-number {
             font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Видео презентация */
-        .video-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
+            color: var(--accent);
+            font-weight: 700;
         }
 
         @media (max-width: 768px) {
@@ -141,11 +134,11 @@
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .stats {
+                flex-direction: column;
             }
         }
     </style>
@@ -157,40 +150,110 @@
             <ul class="nav-links">
                 <li><a href="about.html">О проекте</a></li>
                 <li><a href="team.html">Участники</a></li>
-                <li><a href="journal.html">Журнал и Ресурсы</a></li>
+                <li><a href="journal.html">Журнал</a></li>
+                <li><a href="resources.html">Ресурсы</a></li>
             </ul>
         </div>
     </nav>
 
-    <section class="hero">
+    <div class="hero">
         <div class="hero-content">
-            <h1>Учебный киберполигон МГПУ</h1>
-            <p>Инновационная платформа для подготовки специалистов в области кибербезопасности через практическое обучение в контролируемой среде</p>
+            <h1>Киберполигон МПУ</h1>
 
-            <div class="stats-grid">
+            <div class="project-annotation">
+                <p>Инновационная образовательная платформа для подготовки специалистов в области кибербезопасности.
+                Проект объединяет виртуальные лаборатории, практические задания и современные технологии
+                для моделирования реальных кибератак в контролируемой среде.</p>
+            </div>
+
+            <div class="stats">
                 <div class="stat-item">
-                    <h3>70+</h3>
-                    <p>Участников проекта</p>
+                    <div class="stat-number">70+</div>
+                    <div class="stat-text">Участников</div>
                 </div>
                 <div class="stat-item">
-                    <h3>20+</h3>
-                    <p>Практических модулей</p>
+                    <div class="stat-number">20+</div>
+                    <div class="stat-text">Практических модулей</div>
                 </div>
                 <div class="stat-item">
-                    <h3>1000+</h3>
-                    <p>Часов обучения</p>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-text">Технологий</div>
                 </div>
             </div>
 
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/КОД_ВИДЕО"
-                        title="Презентация проекта"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <h3>Цели проекта</h3>
+                    <ul>
+                        <li>Снижение затрат на подготовку киберучений</li>
+                        <li>Создание гибкой обучающей платформы</li>
+                        <li>Подготовка квалифицированных специалистов</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-card">
+                    <h3>Достижения</h3>
+                    <ul>
+                        <li>Прототип виртуального полигона</li>
+                        <li>Обучение 70+ студентов</li>
+                        <li>Интеграция Docker и Kubernetes</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-card">
+                    <h3>Технологии</h3>
+                    <ul>
+                        <li>Виртуализация (Docker, VirtualBox)</li>
+                        <li>OWASP ZAP и Metasploit</li>
+                        <li>Django и React</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+<footer style="background: #020c1b; padding: 4rem 2rem; margin-top: auto; border-top: 1px solid rgba(100, 255, 218, 0.1);">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+        <!-- Контакты -->
+        <div>
+            <h3 style="color: #64ffda; margin-bottom: 1.5rem; font-size: 1.2rem;">Контакты</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 0.8rem;">
+                    <a href="mailto:cyberpolygon@mpu.ru" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">✉️ cyberpolygon@mpu.ru</a>
+                </li>
+                <li style="margin-bottom: 0.8rem;">
+                    <a href="tel:+74951234567" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">📞 +7 (495) 123-45-67</a>
+                </li>
+                <li style="color: #8892b0;">Москва, ул. Большая Семеновская, 38</li>
+            </ul>
+        </div>
+
+        <!-- Быстрые ссылки -->
+        <div>
+            <h3 style="color: #64ffda; margin-bottom: 1.5rem; font-size: 1.2rem;">Навигация</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 0.8rem;"><a href="about.html" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">О проекте</a></li>
+                <li style="margin-bottom: 0.8rem;"><a href="team.html" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">Участники</a></li>
+                <li style="margin-bottom: 0.8rem;"><a href="journal.html" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">Журнал</a></li>
+                <li><a href="journal.html" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">Журнал и Ресурсы</a></li>
+            </ul>
+        </div>
+
+        <!-- Соцсети -->
+        <div>
+            <h3 style="color: #64ffda; margin-bottom: 1.5rem; font-size: 1.2rem;">Сообщество</h3>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="https://github.com/cyberpolygon2024" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">🐙 GitHub</a>
+                <a href="https://t.me/CyberStratCom" style="color: #ccd6f6; text-decoration: none; transition: color 0.3s;">📢 Telegram Руководителя проекта</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Копирайт -->
+    <div style="max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(100, 255, 218, 0.1); text-align: center; color: #8892b0;">
+        <p>© 2025 Киберполигон МПУ. Все права защищены</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Разработано студентами при поддержке Центра кибербезопасности МПУ</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Создатель сайта Невретдинов Илья группы 241-327</p>
+    </div>
+</footer>
 </body>
 </html>
